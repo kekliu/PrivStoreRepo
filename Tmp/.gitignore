@@ -1,0 +1,9 @@
+build-*
+*.pro.user*
+.catkin_workspace
+
+*kdev*
+
+*.user
+build/
+
