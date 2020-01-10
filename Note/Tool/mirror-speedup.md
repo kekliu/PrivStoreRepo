@@ -1,8 +1,8 @@
-# apt-get
-Choose tsinghua / cqu / aliyun
+## apt-get
+Choose tsinghua / aliyun mirror.
 
-# maven
-## Single project only
+## maven
+### Single project only
 Add the following to pom.xml:
 ```xml
 <repositories>
@@ -13,7 +13,7 @@ Add the following to pom.xml:
     </repository>
 </repositories>
 ```
-## Global
+### Global
 Modify settings.xml, e.g. /opt/idea-IC-182.4323.46/plugins/maven/lib/maven3/conf/settings.xml,
 find tag "mirrors", add the following:
 ```xml
@@ -25,25 +25,13 @@ find tag "mirrors", add the following:
 </mirror>
 ```
 
-# docker
-docker-cn / aliyun
+## docker
+docker-ce: https://mirror.tuna.tsinghua.edu.cn/help/docker-ce/  
+docker container: aliyun / docker-cn
 
-# python
-## conda
-tsinghua
-## pip
-tsinghua
+## python
+Conda: https://mirror.tuna.tsinghua.edu.cn/help/anaconda/  
+pip: https://mirror.tuna.tsinghua.edu.cn/help/pypi/  
 
-# ROS
-```bash
-sudo sh -c '. /etc/lsb-release && echo "deb http://mirrors.tuna.tsinghua.edu.cn/ros/ubuntu/ $DISTRIB_CODENAME main" > /etc/apt/sources.list.d/ros-latest.list'
-sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
-sudo apt update && sudo apt install ros-kinetic-desktop
-```
-
-# others
-## tsinghua mirror support
-### package
-apache, docker-ce, gnu, jenkins, lineageOS
-### mirror
-centos, cygwin, debian, fedora
+## ROS
+https://mirror.tuna.tsinghua.edu.cn/help/ros/

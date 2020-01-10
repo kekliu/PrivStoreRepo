@@ -8,3 +8,14 @@ note/tool/latex/
 
 .vscode/
 build/
+Note/Tool/latex/main.aux
+Note/Tool/latex/main.log
+Note/Tool/latex/main.out
+Note/Tool/latex/main.pdf
+Note/Tool/latex/main.synctex.gz
+Note/Tool/latex/main.toc
+Tmp/IdeaProjects/antlr/gen/grammer/
+*.class
+Note/Tool/latex/main.dvi
+*.interp
+*.tokens

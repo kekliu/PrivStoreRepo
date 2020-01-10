@@ -1,87 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="97b42beb-0315-412d-a27f-302a6b9d2c89" name="Default" comment="" />
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path="$PROJECT_DIR$/target/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="97b42beb-0315-412d-a27f-302a6b9d2c89" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_7_0_M1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_7_0_M1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_7_0_M1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_7_0_M1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_7_0_M1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_7_0_M1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Behavioral/Observer/ConcreteObserver1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Behavioral/Observer/ConcreteObserver2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Behavioral/Observer/ConcreteSubject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Behavioral/Observer/Observer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Behavioral/Observer/Subject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Behavioral/Observer/Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/FactoryMethod/GifReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/FactoryMethod/GifReaderFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/FactoryMethod/ImageReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/FactoryMethod/ImageReaderFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/FactoryMethod/JpgReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/FactoryMethod/JpgReaderFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/SimpleFactory/Creature.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/SimpleFactory/Man.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/SimpleFactory/Nvwa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/SimpleFactory/Robot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/SimpleFactory/Woman.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/DesignPatterns/Creational/FactoryMethod/ImageReaderFactoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/DesignPatterns/Creational/SimpleFactory/NvwaTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../antlr/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../antlr/.idea/libraries/Maven__com_ibm_icu_icu4j_61_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../antlr/.idea/libraries/Maven__org_antlr_ST4_4_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../antlr/.idea/libraries/Maven__org_antlr_antlr4_4_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../antlr/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../antlr/src/main/java/CalculatorVisitorImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Note/Tool/latex/main.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Note/Tool/latex/main.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DesignPartterns.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DesignPartterns.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/MailSender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/MailSenderFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/Provider.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/Sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/SmsSender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/SmsSenderFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/Builder/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/Builder/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/FactoryMethod/MailSender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/FactoryMethod/Sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/FactoryMethod/SenderFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/FactoryMethod/SmsSender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/FactoryMethod/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Structural/Adapter/Targetable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DesignPatterns/Structural/Adapter/Targetable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DesignPatterns/Type.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MainClass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../antlr/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../antlr/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../antlr/.idea/libraries/Maven__com_ibm_icu_icu4j_58_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../antlr/.idea/libraries/Maven__org_antlr_ST4_4_0_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../antlr/.idea/libraries/Maven__org_antlr_antlr4_4_7_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../antlr/.idea/libraries/Maven__org_antlr_antlr4_runtime_4_7_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../antlr/.idea/libraries/Maven__org_antlr_antlr4_runtime_4_8_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../antlr/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../antlr/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../antlr/antlr.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../antlr/antlr.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../antlr/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../antlr/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../antlr/src/main/java/MainClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/../antlr/src/main/java/MainClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../antlr/src/main/java/grammer/calculator.g4" beforeDir="false" afterPath="$PROJECT_DIR$/../antlr/src/main/java/grammer/Calculator.g4" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-1105468226">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="1" />
-          <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="1" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/MainClass.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Kotlin Worksheet" />
+        <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>org.xxx.test4java.</find>
-    </findStrings>
-    <replaceStrings>
-      <replace />
-    </replaceStrings>
-    <dirStrings>
-      <dir>$PROJECT_DIR$/src/main/java/DesignPatterns</dir>
-    </dirStrings>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/main/java/DesignPatterns1/Type.java" />
-        <option value="$PROJECT_DIR$/src/main/java/DesignPatterns/Type.java" />
-        <option value="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/Prototype/Test.java" />
-        <option value="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/MailSender.java" />
-        <option value="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/MailSenderFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/Provider.java" />
-        <option value="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/Sender.java" />
-        <option value="$PROJECT_DIR$/src/main/java/MainClass.java" />
-      </list>
-    </option>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="MavenImportPreferences">
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
-      </MavenImportingSettings>
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="65" />
-    <option name="y" value="-4" />
-    <option name="width" value="1301" />
-    <option name="height" value="772" />
-  </component>
+  <component name="ProjectId" id="1gEA0DyjJLeHlcixlNKFFDyMIFz" />
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
@@ -157,50 +202,41 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="DesignPartterns" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DesignPartterns" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="AndroidView" />
-    </panes>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SearchEverywhereHistoryKey" value="refactor&#9;ACTION&#9;RefactoringMenu" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="terminal" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/FactoryMethod" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="DesignPatterns.Creational.FactoryMethod" />
+      <recent name="DesignPatterns.Creational.SimpleFactory" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="DesignPatterns.Creational.FactoryMethod" />
+      <recent name="DesignPatterns.Creational.SimpleFactory" />
       <recent name="DesignPatterns" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.ImageReaderFactoryTest">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -221,13 +257,75 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ImageReaderFactoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DesignPartterns" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DesignPatterns.Creational.FactoryMethod.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DesignPatterns.Creational.FactoryMethod" />
+      <option name="MAIN_CLASS_NAME" value="DesignPatterns.Creational.FactoryMethod.ImageReaderFactoryTest" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
+    <configuration name="NvwaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DesignPartterns" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DesignPatterns.Creational.SimpleFactory.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DesignPatterns.Creational.SimpleFactory" />
+      <option name="MAIN_CLASS_NAME" value="DesignPatterns.Creational.SimpleFactory.NvwaTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NvwaTest.createCreature" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DesignPartterns" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DesignPatterns.Creational.SimpleFactory.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DesignPatterns.Creational.SimpleFactory" />
+      <option name="MAIN_CLASS_NAME" value="DesignPatterns.Creational.SimpleFactory.NvwaTest" />
+      <option name="METHOD_NAME" value="createCreature" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <properties />
       <listeners />
@@ -235,21 +333,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
+      <predefined_log_file enabled="true" id="idea.log" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ImageReaderFactoryTest" />
+        <item itemvalue="JUnit.NvwaTest.createCreature" />
+        <item itemvalue="JUnit.NvwaTest" />
         <item itemvalue="Application.MainClass" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -260,130 +362,97 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1503305140499</updated>
+      <workItem from="1597669153406" duration="8992000" />
+      <workItem from="1597806701831" duration="3823000" />
+      <workItem from="1597819201754" duration="3893000" />
+      <workItem from="1597824804690" duration="649000" />
+      <workItem from="1597825466167" duration="4539000" />
     </task>
     <servers />
   </component>
-  <component name="ToolWindowManager">
-    <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26865673" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32868218" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32868218" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Tool Output" order="8" weight="0.32868218" />
-      <window_info anchor="bottom" id="ANTLR Preview" order="9" weight="0.33333334" />
-      <window_info anchor="bottom" id="Thumbnails" order="10" weight="0.32868218" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.32868218" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24940239" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Maven Projects" order="7" />
-    </layout>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/M.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/DesignPatterns/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="26" selection-start-column="8" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/Prototype/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="26" selection-start-column="26" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/MailSender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DesignPatterns/Type.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="23" selection-start-column="23" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/MailSenderFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="8" selection-start-column="8" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/Provider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="8" selection-start-column="8" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DesignPatterns/Creational/AbstractFactory/Sender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MainClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+  <component name="WindowStateProjectService">
+    <state x="479" y="131" width="1024" height="852" key="#Project_Structure" timestamp="1597824240421">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="479" y="131" width="1024" height="852" key="#Project_Structure/72.27.1848.1053@72.27.1848.1053" timestamp="1597824240421" />
+    <state x="804" y="261" width="374" height="592" key="#com.intellij.ide.util.MemberChooser" timestamp="1597828243841">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="804" y="261" width="374" height="592" key="#com.intellij.ide.util.MemberChooser/72.27.1848.1053@72.27.1848.1053" timestamp="1597828243841" />
+    <state x="267" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597827941901">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="267" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1597827941901" />
+    <state x="724" y="405" width="534" height="303" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1597810584605">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="724" y="405" width="534" height="303" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/72.27.1848.1053@72.27.1848.1053" timestamp="1597810584605" />
+    <state x="766" y="282" width="449" height="550" key="FileChooserDialogImpl" timestamp="1597824855192">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="766" y="282" width="449" height="550" key="FileChooserDialogImpl/72.27.1848.1053@72.27.1848.1053" timestamp="1597824855192" />
+    <state width="1802" height="273" key="GridCell.Tab.0.bottom" timestamp="1597829719748">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1802" height="273" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1597829719748" />
+    <state width="1802" height="273" key="GridCell.Tab.0.center" timestamp="1597829719747">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1802" height="273" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1597829719747" />
+    <state width="1802" height="273" key="GridCell.Tab.0.left" timestamp="1597829719747">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1802" height="273" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1597829719747" />
+    <state width="1802" height="273" key="GridCell.Tab.0.right" timestamp="1597829719748">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1802" height="273" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1597829719748" />
+    <state x="579" y="299" width="824" height="515" key="IDE.errors.dialog" timestamp="1597824367918">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="579" y="299" width="824" height="515" key="IDE.errors.dialog/72.27.1848.1053@72.27.1848.1053" timestamp="1597824367918" />
+    <state x="485" y="188" width="1022" height="737" key="SettingsEditor" timestamp="1597828324288">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="485" y="188" width="1022" height="737" key="SettingsEditor/72.27.1848.1053@72.27.1848.1053" timestamp="1597828324288" />
+    <state x="762" y="337" width="446" height="447" key="chooseDestDirectoryDialog" timestamp="1597825545296">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="762" y="337" width="446" height="447" key="chooseDestDirectoryDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1597825545296" />
+    <state x="689" y="358" width="613" height="398" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1597827753165">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="689" y="358" width="613" height="398" key="com.intellij.testIntegration.createTest.CreateTestDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1597827753165" />
+    <state x="659" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1597824833808">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="659" y="259" width="672" height="678" key="search.everywhere.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1597824833808" />
   </component>
 </project>

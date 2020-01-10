@@ -369,7 +369,10 @@
 	\end{equation}
 	
 	该公式中，除了$P_2$是待求量，其它全都是已知的。
-	不妨记$k1=R_2^{(3)} (t_1 - P_1 t_1^{(3)})$，$C=P_1 R_1^{(3)} - R_1$，$k2=t_2^{(3)$，$V=(P_1 R_1^{(3)} - R_1)t_2 + R_2(t_1 - P_1 t_1^{(3)})$，则上式可化简为
+	不妨记$k1=R_2^{(3)} (t_1 - P_1 t_1^{(3)})$，
+	$C=P_1 R_1^{(3)} - R_1$，
+	$k2=t_2^{(3)}$，
+	$V=(P_1 R_1^{(3)} - R_1)t_2 + R_2(t_1 - P_1 t_1^{(3)})$，则上式可化简为
 	\begin{equation}
 	P_2 k_1 + C P_2 k_2 = V
 	\end{equation}
@@ -856,5 +859,82 @@
 	\subsubsection{关键帧BA}
 	\subsubsection{图优化}
 	
+	
+	
+	
+	
+
+	\section{投影}
+	\begin{equation}
+	s(x,y)
+	\begin{bmatrix}
+	x \\ y \\ 1
+	\end{bmatrix}
+	=K(RW+t)
+	\end{equation}
+	
+	\begin{equation}
+	W=R^{-1} K^{-1} s
+	\begin{bmatrix}
+	x \\ y \\ 1
+	\end{bmatrix}
+	- R^{-1} t
+	\end{equation}
+	
+	\begin{equation}
+	\begin{split}
+	dW
+	& = R^{-1} K^{-1} \left(
+	s \begin{bmatrix} dx \\ dy \\ 0 \end{bmatrix}
+	+
+	ds \begin{bmatrix} x \\ y \\ 1 \end{bmatrix}
+	\right)
+	\\
+	& = R^{-1} K^{-1} \left(
+	s \begin{bmatrix} dx \\ dy \\ 0 \end{bmatrix}
+	+
+	\left(\frac{\partial s}{\partial x} dx + \frac{\partial s}{\partial y} dy\right) \begin{bmatrix} x \\ y \\ 1 \end{bmatrix}
+	\right)
+	\\
+	& = R^{-1} K^{-1}
+	\begin{bmatrix}
+	s dx + x s'_x dx + x s'_y dy \\
+	s dy + y s'_x dx + y s'_y dy \\
+	s_x dx + s_y dy
+	\end{bmatrix}
+	\\
+	& = R^{-1} K^{-1}
+	\begin{bmatrix}
+	s + x s'_x + x s'_y \\
+	s + y s'_x + y s'_y \\
+	s'_x + s'_y
+	\end{bmatrix}
+	\end{split}
+	\end{equation}
+	
+	\begin{equation}
+	\begin{aligned}
+	\frac{W_y}{W_x} (is Differentiable) & \Rightarrow & d(\frac{W_y}{W_x})(Meaningful) \\
+	& \Rightarrow W_x^2 > 0
+	\end{aligned}
+	\end{equation}
+	
+	\begin{equation}
+	\frac{W_z}{\sqrt{W_x^2+W_y^2}} (is Differentiable) \Rightarrow W_x^2 + W_y^2 > 0
+	\end{equation}
+	
+	\begin{equation}
+	\left\|
+	K^{-1}
+	\begin{bmatrix}
+	s + x s'_x + x s'_y \\
+	s + y s'_x + y s'_y \\
+	s'_x + s'_y
+	\end{bmatrix}
+	\right\|
+	> 0
+	\end{equation}
+
+
 
 \end{document}

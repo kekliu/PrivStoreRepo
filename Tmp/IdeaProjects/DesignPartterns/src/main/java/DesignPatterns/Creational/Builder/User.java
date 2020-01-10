@@ -73,8 +73,8 @@ public class User {
 
         /**
          * Builder函数
-         * 由于Builder是非线程安全的，所以如果要在Builder内部类中检查一个参数的合法性，必需要在对象创建完成之后再检查。
          *
+         * 由于Builder是非线程安全的，所以如果要在Builder内部类中检查一个参数的合法性，必需要在对象创建完成之后再检查。
          * @return
          */
         public User build() {

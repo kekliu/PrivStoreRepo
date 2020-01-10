@@ -3,6 +3,10 @@ package DesignPatterns.Structural.Adapter;
 /**
  * Created by kekliu on 6/20/17.
  */
+
+/**
+ *
+ */
 public interface Targetable {
 
     /* 与原类中的方法相同 */
