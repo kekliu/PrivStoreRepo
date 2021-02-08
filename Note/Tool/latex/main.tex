@@ -1,3 +1,4 @@
+% !TEX TS-program = xelatex
 % !TeX encoding = UTF-8
 % import ctexart
 \documentclass{ctexart}
@@ -936,5 +937,19 @@
 	\end{equation}
 
 
+	
+	\section{VINS预积分推导}
+	\subsection{记号说明}
+	\subsubsection{上下标}
+	\par b = body frame = imu frame
+	\par w = world frame
+	\par 例如，$R_w^{b_k} p_{b_{k+1}}^w = p_{b_{k+1}}^k$中的$p_{b_{k+1}}^w$表示点$t_{k+1}$时刻，imu坐标系在世界坐标系中的位置。
+	\begin{equation}
+		\begin{split}
+			p_{b_{k+1}}^w & = p_{b_k}^w + v_{b_k}^w \Delta t_k +\iint_{t\in [t_k,t_{k+1}]} (R^w_t(\hat{a}_t-b_{a_t}-n_a)-g^w) dt^2 \\
+			v_{b+1}^w & = v_{b_k}^w + \int_{t\in [t_k,t_{k+1}]} (R^w_t(\hat{a}_t-b_{a_t}-n_a)-g^w) dt \\
+			q_{b_{k+1}}^w & = q_{b_k}^w \otimes \int_{t\in [t_k,t_{k+1}]} \frac{1}{2} \Omega(\hat{w}_t-b_{w_t}-n_w)q_t^{b_k} dt
+		\end{split}
+	\end{equation}
 
 \end{document}

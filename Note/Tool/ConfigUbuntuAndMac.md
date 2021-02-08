@@ -29,6 +29,14 @@ sudo hwclock --localtime --systohc
 
 
 ## Configuration
+### Kernel
+```conf
+vm.overcommit_memory=2
+vm.overcommit_ratio=95
+vm.oom_kill_allocating_task=1
+```
+
+
 ### oh-my-zsh
 > sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
@@ -53,6 +61,19 @@ vscode
 qv2ray  
 nvidia-driver  
 IntelliJ IDEA
+
+
+## Cuda support
+### Install nvidia-driver
+Install nvidia driver by command:
+```shell
+sudo apt install nvidia-driver-450
+```
+If after installing nvidia drivers, ubuntu boots to black screen or login screen that freezes. Please change `/etc/default/grub` with adding the following line:
+```conf
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash nvidia-drm.modeset=1"
+```
+If black screen exists still, please use `nvidia-bug-report.sh` to report bug on https://forums.developer.nvidia.com/.
 
 
 # Mac
