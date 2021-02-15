@@ -1,15 +1,16 @@
-FROM ubuntu:focal
+FROM ubuntu:20.04
 
 
 # copy files
 COPY ./sources.list /etc/apt/sources.list
 COPY ./ros_entrypoint.sh /
+COPY ./.vimrc /root/.vimrc
 
 
 # setup environment
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-ENV EDITOR=vim
+ENV EDITOR vim
 ENV ROS_DISTRO noetic
 ENV TZ=Asia/Shanghai
 
