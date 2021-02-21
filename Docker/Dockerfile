@@ -12,7 +12,8 @@ ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 ENV EDITOR vim
 ENV ROS_DISTRO noetic
-ENV TZ=Asia/Shanghai
+ENV TZ Asia/Shanghai
+ENV SHELL zsh
 
 
 # install recommended packages
@@ -26,10 +27,11 @@ RUN apt-get update \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     # install packages
     && apt-get install -q -y --no-install-recommends \
-    dirmngr gnupg2 \
+    dirmngr gnupg2 sudo \
     git tig build-essential clang gdb cmake ninja-build \
-    zsh sudo tree htop autojump iotop wget apt-file \
+    zsh tree htop autojump iotop wget apt-file asciinema \
     vim-nox \
+    python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -51,7 +53,13 @@ RUN : \
     && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions \
     && sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="ys"/g' ~/.zshrc \
     && sed -i 's/plugins=(git)/plugins=(git autojump command-not-found zsh-autosuggestions)/g' ~/.zshrc \
-    && echo 'ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#666666"' >> ~/.zshrc
+    && echo 'ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#666666"' >> ~/.zshrc \
+    # configure pip
+    && pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple/ \
+    # configure GEF
+    && pip3 install --user --no-cache-dir keystone-engine unicorn ropper capstone \
+    && wget -O ~/.gdbinit-gef.py -q https://github.com/hugsy/gef/raw/master/gef.py \
+    && echo source ~/.gdbinit-gef.py >> ~/.gdbinit
 
 
 # setup entrypoint
