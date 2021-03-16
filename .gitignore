@@ -19,3 +19,4 @@ Tmp/IdeaProjects/antlr/gen/grammer/
 Note/Tool/latex/main.dvi
 *.interp
 *.tokens
+.cache/

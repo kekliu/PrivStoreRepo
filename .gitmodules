@@ -1,0 +1,3 @@
+[submodule "Note/Cpp/Library/ceres-solver/test/Sophus"]
+	path = Note/Cpp/Library/ceres-solver/test/Sophus
+	url = https://github.com/strasdat/Sophus

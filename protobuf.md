@@ -36,7 +36,7 @@ rm -rf grpc
 ### Use protoc go plugin
 
 ```base
-go install google.golang.org/protobuf/cmd/protoc-gen-go
+go get google.golang.org/protobuf/cmd/protoc-gen-go google.golang.org/grpc/cmd/protoc-gen-go-grpc
 export PATH="$PATH:$(go env GOPATH)/bin"
 protoc --go_out=. f.proto
 ```

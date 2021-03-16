@@ -1,13 +1,20 @@
---------------------- 服务器端配置 --------------------------
-1. sudo vim /etc/default/rsync  
-    RSYNC_ENABLE=true
-2. sudo cp /usr/share/doc/rsync/examples/rsyncd.conf /etc
-    sudo vim /etc/rsyncd.conf
-    ADD ++++++++++++++++++++++
-[AlphaStar]
 
+
+# rsync
+
+[toc]
+
+## Configure
+
+### Server
+
+```bash
+sed -i 's/RSYNC_ENABLE=.*/RSYNC_ENABLE=true/' /etc/default/rsync
+cp /usr/share/doc/rsync/examples/rsyncd.conf /etc
+cat << EOF >> /etc/rsyncd.conf
+[customservice]
         comment = public archive
-        path = /opt/AlphaStar
+        path = /opt/data
         use chroot = yes
 #       max connections=10
         lock file = /var/lock/rsyncd
@@ -32,19 +39,22 @@
         timeout = 600
         refuse options = checksum dry-run
         dont compress = *.gz *.tgz *.zip *.z *.rpm *.deb *.iso *.bz2 *.tbz
+EOF
+echo $HOME:password >> /etc/rsyncd.secrets
+chmod 0600 /etc/rsyncd.secrets
+service rsync restart
+#echo '/usr/bin/rsync --daemon' >> /etc/rc.local
+```
 
 主要更改了 path, read only, uid, gid, auth users, secrets file 选项。
 
-3. sudo vim /etc/rsyncd.secrets
-    ADD ++++++++++++++++++++++
-whu:whu
+### Client
 
-4. sudo chmod 0600 /etc/rsyncd.secrets
+You need to configure nothing on client, just use it.
 
-5. sudo service rsync restart
+## Usage
 
---------------------- 用法 --------------------------
-
+```
 Local:  rsync [OPTION...] SRC... [DEST]
 
 Access via remote shell:
@@ -59,13 +69,8 @@ Access via rsync daemon:
 
 Usages with just one SRC arg and no DEST arg will list the source files instead of copying.
 
---------------------- 实际应用 --------------------------
-使用ssh服务同步:
-rsync -av --delete /opt/AlphaStar/ ak@192.168.1.144:/opt/AlphaStar/buildANDinstall/install
-使用rsync守护进程同步:
-rsync -av --delete /opt/AlphaStar/ aka@192.168.1.144::AlphaStar
+Example:
+rsync -av --delete /opt/src/ username@192.168.1.144:/opt/dst
+rsync -av --delete /opt/src/ aka@192.168.1.144::AlphaStar
+```
 
-6. 开机自启
-sudo vim /etc/rc.local
-ADD +++++++++++++++++++++++
-/usr/bin/rsync --daemon
