@@ -1,7 +1,33 @@
-#include "Sophus/sophus/so3.hpp"
 #include <ceres/ceres.h>
 
 using Vec = Eigen::Vector3d;
+
+namespace {
+
+inline Eigen::Quaterniond toQuaterniond(const Eigen::Vector3d &v3d,
+                                        double *angle = NULL) {
+  const double kAngleEpisode = 1e-6;
+  double theta = v3d.norm();
+  if (angle != NULL)
+    *angle = theta;
+  double half_theta = 0.5 * theta;
+
+  double imag_factor;
+  double real_factor = cos(half_theta);
+  if (theta < kAngleEpisode) {
+    double theta_sq = theta * theta;
+    double theta_po4 = theta_sq * theta_sq;
+    imag_factor = 0.5 - (1 / 48.) * theta_sq + (1 / 3840.) * theta_po4;
+  } else {
+    double sin_half_theta = sin(half_theta);
+    imag_factor = sin_half_theta / theta;
+  }
+
+  return Eigen::Quaterniond(real_factor, imag_factor * v3d.x(),
+                            imag_factor * v3d.y(), imag_factor * v3d.z());
+}
+
+} // namespace
 
 ///////////////////// autodiff begin /////////////////////
 class CostFunctor {
@@ -95,9 +121,9 @@ class ParameterizationSO3 : public ceres::LocalParameterization {
 public:
   bool Plus(const double *x, const double *delta,
             double *x_plus_delta) const override {
-    auto dq = Sophus::SO3d::exp(Vec(delta));
+    auto dq = toQuaterniond(Vec(delta));
     Eigen::Map<Eigen::Quaterniond>{x_plus_delta} =
-        Eigen::Map<const Eigen::Quaterniond>{x} * dq.unit_quaternion();
+        (Eigen::Map<const Eigen::Quaterniond>{x} * dq).normalized();
     return true;
   }
 
@@ -137,7 +163,7 @@ void TestCostFunctorSO3() {
 ///////////////////// custom end /////////////////////
 
 int main() {
-  // TestCostFunctor();
+  TestCostFunctor();
   TestCostFunctorSO3();
 
   return 0;

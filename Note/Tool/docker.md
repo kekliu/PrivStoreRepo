@@ -7,3 +7,4 @@ docker run --restart always -p 3306:3306 -d --name mysql -e MYSQL_ROOT_PASSWORD=
 Open /etc/mysql/my.cnf, add the following to '[mysqld]' to enable utf-8 support:
 default-character-set = utf8
 character_set_server = utf8
+
