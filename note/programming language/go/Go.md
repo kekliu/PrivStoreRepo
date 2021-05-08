@@ -154,3 +154,6 @@ defer的可靠性: https://blog.golang.org/defer-panic-and-recover
 ### &arr VS &arr[0]
 
 GO切片名类似于C的数组，&arr表示数组地址，&arr[0]才是数组第一个元素的地址。
+
+### 传值/传引用
+**Go语言传递slice/map/chan是传引用（相当于传递他们的指针），类似于java的对象传递；传递其它类型（包括指针）都是传值。**
