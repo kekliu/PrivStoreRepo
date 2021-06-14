@@ -4,12 +4,9 @@ using Vec = Eigen::Vector3d;
 
 namespace {
 
-inline Eigen::Quaterniond toQuaterniond(const Eigen::Vector3d &v3d,
-                                        double *angle = NULL) {
+inline Eigen::Quaterniond toQuaterniond(const Eigen::Vector3d &v3d) {
   const double kAngleEpisode = 1e-6;
   double theta = v3d.norm();
-  if (angle != NULL)
-    *angle = theta;
   double half_theta = 0.5 * theta;
 
   double imag_factor;
@@ -87,10 +84,10 @@ inline Eigen::Matrix3d Skew(const Vec &t) {
 
 class CostFunctorSO3 : ceres::SizedCostFunction<3, 4> {
 public:
-  CostFunctorSO3(Vec x, Vec y) : x_(x), y_(y) {}
+  CostFunctorSO3(Vec x, Vec y) : x_(std::move(x)), y_(std::move(y)) {}
 
   bool Evaluate(double const *const *parameters, double *residuals,
-                double **jacobians) const {
+                double **jacobians) const override {
     Eigen::Map<const Eigen::Quaterniond> q(parameters[0]);
     Eigen::Map<Eigen::Vector3d>{residuals} = q * x_ - y_;
 
@@ -128,9 +125,11 @@ public:
   }
 
   bool ComputeJacobian(const double *x, double *jacobian) const override {
-    // Q3: use RowMajor in Matrix instead of Map
+    // use RowMajor in Matrix instead of Map
     Eigen::Map<Eigen::Matrix<double, 4, 3, Eigen::RowMajor>> J(jacobian);
-    // Q4: why set identity here
+    // keypoint2:
+    // we've already got jacobian of rediduals to tanget space,
+    // so local parameterization jacobian should be set to identity
     J.setIdentity();
     return true;
   }

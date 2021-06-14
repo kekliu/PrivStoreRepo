@@ -14,5 +14,7 @@ include_directories(
     ${PROTOBUF_INCLUDE_DIR}
 )
 
+#set(CMAKE_CXX_FLAGS "-fsanitize=address -g")
+
 add_executable(out main.cc)
 target_link_libraries(out ${CERES_LIBRARIES})
