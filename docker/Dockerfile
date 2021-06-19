@@ -58,7 +58,7 @@ RUN : \
     && pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple/ \
     # configure GEF
     && pip3 install --user --no-cache-dir keystone-engine unicorn ropper capstone \
-    && wget -O ~/.gdbinit-gef.py -q https://github.com/hugsy/gef/raw/master/gef.py \
+    && wget -O ~/.gdbinit-gef.py -q http://gef.blah.cat/py \
     && echo source ~/.gdbinit-gef.py >> ~/.gdbinit
 
 
