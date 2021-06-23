@@ -29,7 +29,7 @@ inline Eigen::Quaterniond toQuaterniond(const Eigen::Vector3d &v3d) {
 ///////////////////// autodiff begin /////////////////////
 class CostFunctor {
 public:
-  CostFunctor(Vec x, Vec y) : x_(x), y_(y) {}
+  CostFunctor(Vec x, Vec y) : x_(std::move(x)), y_(std::move(y)) {}
 
   template <typename T> bool operator()(const T *const q_raw, T *e_raw) const {
     Eigen::Map<const Eigen::Quaternion<T>> q(q_raw);

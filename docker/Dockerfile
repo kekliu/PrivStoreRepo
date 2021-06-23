@@ -32,6 +32,7 @@ RUN apt-get update \
     zsh tree htop autojump iotop wget apt-file asciinema \
     vim-nox \
     python3-pip \
+    dnsutils \
     && rm -rf /var/lib/apt/lists/*
 
 
