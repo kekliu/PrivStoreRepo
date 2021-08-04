@@ -27,11 +27,11 @@ docker run -itd --name mongo -p 27017:27017 mongo:4.4
 #### nginx
 ##### file server
 ```bash
-docker run -p 10080:10080 -v $HOME/.data:/dataDir --restart always -itd --name nginx nginx:1.19 bash
+docker run -p 20080:20080 -v $HOME/.data:/dataDir --restart always -itd --name nginx nginx:1.19 bash
 docker exec -it nginx bash
 cat << EOF > /etc/nginx/conf.d/file_server.conf                              
 server {
-  listen 10080;
+  listen 20080;
   server_name localhost;
   root /dataDir;
   location / {
