@@ -1,0 +1,162 @@
+\section{全景相片拼接}
+记像素点坐标为p，校正后像片内参为K，像空间辅助坐标系和世界坐标系间的变换为R和t。
+\begin{equation}
+  sp=K(RW+t)
+\end{equation}
+
+把$K^{-1}$移到左边，得到
+\begin{equation}
+  sK^{-1}p=RW+t
+\end{equation}
+
+令$P=K^{-1}p$，则
+\begin{equation}
+  sP=RW+t \label{camera_base}
+\end{equation}
+
+\subsection{推导一}
+由$P$的最后一行为1可知，
+\begin{equation}
+  s=R^{(3)}W+t^{(3)}
+\end{equation}
+
+代入公式（\ref{camera_base}）可知
+\begin{equation}
+  (PR^{(3)}-R)W=t-Pt^{(3)} \label{wrong_label}
+\end{equation}
+
+对于左右两个相机，有
+\begin{equation}
+  (P_1 R_1^{(3)} - R_1)(t_2 - P_2 t_2^{(3)})=
+  (P_2 R_2^{(3)} - R_2)(t_1 - P_1 t_1^{(3)})
+\end{equation}
+
+该公式中，除了$P_2$是待求量，其它全都是已知的。
+不妨记$k1=R_2^{(3)} (t_1 - P_1 t_1^{(3)})$，
+$C=P_1 R_1^{(3)} - R_1$，
+$k2=t_2^{(3)}$，
+$V=(P_1 R_1^{(3)} - R_1)t_2 + R_2(t_1 - P_1 t_1^{(3)})$，则上式可化简为
+\begin{equation}
+  P_2 k_1 + C P_2 k_2 = V
+\end{equation}
+
+考虑到$k_1$ $k_2$都是1x1方阵，可以看成实数，公式可以进一步化简为
+\begin{equation}
+  (k_1 E + k_2 C ) P_2 = V
+\end{equation}
+
+求解上式可得$P_2$坐标。
+
+很遗憾地发现，上述推导从公式（\ref{wrong_label}）开始就是错的，W无法被消去。
+
+\subsection{推导二}
+本推导的目的是通过公式（\ref{camera_base}）将像片上的像点坐标投影到虚拟像空间坐标系，从而进一步投影到圆柱面或球面，生成全景影像。
+设虚拟像空间坐标系表示为$R',t'$，相片的像空间辅助坐标系表示为$R, t$，则由公式（\ref{camera_base}）可以得到
+\begin{equation}
+  W = R^{-1} (P - t) = R'^{-1} (P' - t') \label{quanjingpinjie}
+\end{equation}
+上式中的$P$对应于于公式（\ref{camera_base}）中的$sP$，是像空间辅助坐标系下的坐标。
+因此有
+\begin{equation}
+  P = s K^{-1} p \label{image_to_xyz}
+\end{equation}
+
+将公式（\ref{image_to_xyz}）代入公式（\ref{quanjingpinjie}），得到
+\begin{equation}
+  P' = R' R^{-1} (s K^{-1} p - t) + t'
+\end{equation}
+
+记$\vec{v_1} = R' R^{-1} K^{-1} p = \begin{bmatrix}
+    a & b & c
+  \end{bmatrix}' $，$\vec{v_2} = t' - R' R^{-1} t = \begin{bmatrix}
+    m & n & o
+  \end{bmatrix}'$，则最终可以得到公式
+\begin{equation} \label{get_P_}
+  P' = s
+  \begin{bmatrix}
+    a \\ b \\ c
+  \end{bmatrix}
+  +
+  \begin{bmatrix}
+    m \\ n \\ o
+  \end{bmatrix}
+\end{equation}
+
+在圆柱面投影中，结合公式${P'}_x^2 + {P'}_y^2 = R^2$可以得到一个一元二次方程。该方程必然有正负两个解，负解舍去，正解为
+\begin{equation}
+  \begin{split}
+    s
+    &= \frac{\sqrt{(\vec{v_1}\cdot\vec{v_2})^2 - \vec{v_1}^2(\vec{v_2}^2-R^2)} - \vec{v_1}\cdot\vec{v_2}}{\vec{v_1}^2} \\
+    &= \frac{\sqrt{(am+bn)^2-(a^2+b^2)(m^2+n^2-R^2)}-(am+bn)}{a^2+b^2} \\
+    &= \frac{\sqrt{(a^2+b^2)R^2 - (an-bm)^2}-(am+bn)}{a^2+b^2}
+  \end{split}
+\end{equation}
+
+在球面投影中，结合公式式${P'}_x^2 + {P'}_y^2 + {P'}_z^2 = R^2$可以得到一个一元二次方程。该方程必然有正负两个解，负解舍去，正解为
+\begin{equation}
+  \begin{split}
+    s
+    &= \frac{\sqrt{(\vec{v_1}\cdot\vec{v_2})^2 - \vec{v_1}^2(\vec{v_2}^2-R^2)} - \vec{v_1}\cdot\vec{v_2}}{\vec{v_1}^2} \\
+    &=\frac{\sqrt{(a m+b n+c o)^2-(a^2+b^2+c^2) (m^2+n^2+o^2-R^2)}-(am+bn+co)}{a^2+b^2+c^2}
+  \end{split}
+\end{equation}
+
+\subsection{误差来源}
+\subsubsection{投影差}
+从上面的推导可以知道，虚拟坐标系原点和像素对应的空间点的距离被假定成了R，这会导致距离并非R的像素点在每张图片上都有一个投影偏移，这种偏移在拼接中更为致命：若真实距离大于R，则两个相片拼接重合的部分将偏多，否则偏少。
+\par
+事实上，鉴于R都是假定的，我们甚至可以假设$P_x^2 + P_y^2 = R^2$，这样我们可以直接算出s的值，进一步通过公式（\ref{get_P_}），得到P'点的坐标。
+
+\subsection{使用深度图进行投影}
+\par 相机成像模型
+\begin{equation}
+  s p = K (R W + t) , s>0
+\end{equation}
+\par 深度=物点到相机中心距离
+\begin{equation}
+  depth(p) = |W + R^{-1} t|
+\end{equation}
+
+\par 由成像模型得到
+\begin{equation}
+  s R^{-1} K^{-1} p = W + R^{-1} t
+\end{equation}
+\par 结合深度公式得到
+\begin{equation}
+  s | R^{-1} K^{-1} p | = depth(p)， s>0
+\end{equation}
+\par 因此，有
+\begin{equation}
+  s  = \frac{depth(p)}{| R^{-1} K^{-1} p |}
+\end{equation}
+\par 进而计算出$W$，再结合
+\begin{equation}
+  P' = R' W + t'
+\end{equation}
+\par 计算出$P'$即可。
+\par 当前方法存在的问题：
+1. 本方法是经典的几何方法，不考虑现实情况数学上是严密的，然而真实的相机内参外参、遮挡等都会影响结果，因此拼接结果不会完美；
+2. 本方法要注意的是：深度图必须要是平滑的，遮挡的要特殊考虑；在非平滑环境中效果会很差。
+
+\subsection{使用深度图进行投影 fucking final}
+\par 相机成像模型
+\begin{equation}
+  s p = K (R W + t) , s>0
+\end{equation}
+\par 深度 = s
+\begin{equation}
+  depth(p) = s
+\end{equation}
+
+\par 由上述公式得
+\begin{equation}
+  W = R^{-1} ( s K^{-1} p - t)
+\end{equation}
+\par 再结合
+\begin{equation}
+  P' = R' W + t'
+\end{equation}
+\par 计算出$P'$，然后就可以给出点在全景图上的像素了。
+\par TIPS:
+\par 逆映射指的是已知全景图上的像素和相机的深度图，给出对应相机的图像像素，很显然逆映射无法用经典的代数表达式来表示。
+\par 然而如果已知确定形式的$f((x,y))=(x',y')$的映射，可以内插出$g((x',y'))=(x,y)$。

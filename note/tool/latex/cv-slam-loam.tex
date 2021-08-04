@@ -1,0 +1,203 @@
+\section{loam 算法的李代数形式推导}
+\newcommand{\vecba}[1]{\boldmath\overrightarrow{#1}\unboldmath}
+loam是CMU张博士提出的一种基于特征的ICP算法，主要使用线特征和面特征两种。
+\subsection{记号和推导说明}
+为了简化推导，本文主要使用三种记号: $+,\wedge,\odot$，意义如下：
+\begin{equation}
+	p^+=\begin{bmatrix}
+		p_1 & 0   & 0   \\
+		0   & p_2 & 0   \\
+		0   & 0   & p_3
+	\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+	p^\wedge=\begin{bmatrix}
+		0    & -p_3 & p_2  \\
+		p_3  & 0    & -p_1 \\
+		-p_2 & p_1  & 0
+	\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+	\xi^\wedge
+	=\begin{bmatrix}
+		\phi \\ \rho
+	\end{bmatrix}^\wedge
+	=\begin{bmatrix}
+		\phi^\wedge & \rho \\
+		0           & 0
+	\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+	p^\odot=\begin{bmatrix}
+		-p^\wedge & I_{3\times3}
+	\end{bmatrix}
+\end{equation}
+
+\par 可以注意到，$\wedge$符号使用了两次，一个作用于三维向量得到反对称矩阵，一个作用于李代数扰动增量得到雅克比矩阵，$\odot$表示先旋转后平移。
+\par 此外，下面的推导中隐含有齐次坐标和非齐次坐标之间的转换，为了简便起见，不一一说明。
+
+\subsection{LaserOdometry}
+已知相邻两帧点云$P_1$和$P_2$之间的初始位姿，通过"点-直线"和"点-面"距离最小化进行位姿优化。
+\subsubsection{点-直线距离最小化}
+已知初始位姿的李代数为$\xi$，对于$\forall p \in P_1$，有对应点$p_1,p_2 \in P_2$构成直线，使得点$p$到直线$p_1p_2$的距离最短，该距离用向量表示如下
+\begin{equation}
+	d_{\epsilon} =
+	\frac{|\vecba{p p_1} \times \vecba{p p_2}|}{|\vecba{p_1 p_2}|}
+\end{equation}
+用李代数表示如下
+\begin{equation}
+	\vecba{d_{\epsilon}} =
+	\frac{(p_1-e(\xi ^\wedge)p)^\wedge(p_2-e(\xi ^\wedge)p)}{|\vecba{p_1 p_2}|}
+\end{equation}
+\par 记$p'=e(\xi ^\wedge)p$，$f=(p_1-e(\xi ^\wedge)p) ^\wedge (p_2-e(\xi ^\wedge)p)$，使用李代数扰动模型求导，可以得到
+\begin{equation}
+	\begin{split}
+		\frac{\partial f}{\partial \delta \xi}
+		&=
+		\lim\limits_{\delta \xi \rightarrow 0}
+		\frac{(p_1-e(\delta \xi ^\wedge) p')
+			^\wedge
+			(p_2-e(\delta \xi ^\wedge) p')
+			-
+			(p_1-p') ^\wedge (p_2-p')
+		}{\delta \xi} \\
+		&=
+		\lim\limits_{\delta \xi \rightarrow 0}
+		\frac{(p_1-(1+\delta \xi ^\wedge) p')
+			^\wedge
+			(p_2-(1+\delta \xi ^\wedge) p')
+			-
+			(p_1-p') ^\wedge (p_2-p')
+		}{\delta \xi} \\
+		&=
+		\lim\limits_{\delta \xi \rightarrow 0}
+		\frac{-(p_1-p')^\wedge\delta\xi^\wedge p'- (\delta\xi^\wedge p')^\wedge(p_2-p')}{\delta \xi} \\
+		&=
+		- (p_1-p')^\wedge p'^\odot + (p_2-p')^\wedge p'^\odot \\
+		&=
+		(p_2 - p_1)^\wedge p'^\odot
+	\end{split}
+\end{equation}
+
+\subsubsection{点-面距离最小化}
+已知初始位姿的李代数为$\xi$，对于$\forall p \in P_1$，有对应点$p_1,p_2,p_3 \in P_2$构成平面，使得点$p$到平面$p_1p_2p_3$的距离最短，该距离用向量表示如下
+\begin{equation}
+	d_{\epsilon} =
+	\frac{|(\vecba{p p_1} \times \vecba{p p_2}) \cdot \vecba{p p_3}|}{2|S_{p_1 p_2 p_3}|}
+\end{equation}
+用李代数表示如下
+\begin{equation}
+	\vecba{d_{\epsilon}} =
+	\frac{(p_3-e(\xi ^\wedge)p)^{+}((p_1-e(\xi ^\wedge)p)^\wedge(p_2-e(\xi ^\wedge)p))}{2|S_{p_1 p_2 p_3}|}
+\end{equation}
+\par 记$p'=e(\xi ^\wedge)p$，$p'_1=p_1-p'$，$p'_2=p_2-p'$，$p'_3=p_3-p'$，$h=(p_3-e(\xi ^\wedge)p)
+	^{+}(
+	(p_1-e(\xi ^\wedge)p)
+	^\wedge
+	(p_2-e(\xi ^\wedge)p))$，使用李代数扰动模型求导，可以得到
+\begin{equation}
+	\begin{split}
+		\frac{\partial h}{\partial \delta \xi}
+		&=
+		{p'}_3^{+} {p'}_2^\wedge p'^\odot -
+		{p'}_3^{+} {p'}_1^\wedge p'^\odot -
+		({p'}_1^\wedge p'_2)^{+} p'^\odot \\
+		&=
+		{p'}_3^{+} ({p'}_2-{p'}_1)^\wedge p'^\odot + ({p'}_2^\wedge p'_1)^{+} p'^\odot
+	\end{split}
+\end{equation}
+
+\subsubsection{实现}
+上面的公式来自于loam论文，推导结果是我自己得来的，相较于loam代码中给出的偏导形式要简单得多，但仍较为复杂。实际上，实现时可以使用较为简单的公式。
+\par "点-线"可以使用下面的公式
+\begin{equation}
+	\vecba{d_{\epsilon}} =
+	\frac{(p_2-p_1)^\wedge(e(\xi ^\wedge)p-p_1)}{|\vecba{p_1 p_2}|}
+\end{equation}
+\begin{equation}
+	\frac{\partial \vecba{d_{\epsilon}}}{\partial\delta\xi}
+	=
+	\frac{(p_2-p_1)^\wedge(e(\xi^\wedge)p)^\odot}{|\vecba{p_2p_2}|}
+\end{equation}
+
+\par "点-面"可以使用下面的公式
+\begin{equation}
+	\vecba{d_{\epsilon}} =
+	\frac{(p_3-p_1)^{+}(p_2-p_1)^\wedge(e(\xi ^\wedge)p-p_1)}{2|S_{p_1 p_2 p_3}|}
+\end{equation}
+\begin{equation}
+	\frac{\partial \vecba{d_{\epsilon}}}{\partial\delta\xi}
+	=
+	\frac{(p_3-p_1)^{+}(p_2-p_1)^\wedge(e(\xi ^\wedge)p)^\odot}{2|S_{p_1 p_2 p_3}|}
+\end{equation}
+
+\par MATLAB代码推导：
+\small
+\begin{lstlisting}{language=Matlab}
+	% matrix prefix:
+	% D means 'diag', S means 'skew', d means 'delta'
+	%
+	% variable name:
+	% x0 := p0_x
+	% z10 := p0_z - p1_z
+	
+	%% LaserOdometry derivation
+	syms x0 y0 z0 real
+	syms x10 y10 z10 real
+	syms x12 y12 z12 real
+	syms x13 y13 z13 real
+	Dd13 = diag([x13 y13 z13]);
+	Sd12 = [0 -z12 y12; z12 0 -x12; -y12 x12 0];
+	S0 = [0 -z0 y0; z0 0 -x0; -y0 x0 0];
+	d10 = [x10 y10 z10]';
+	% use 2 points to represent a line
+	disp('point-line')
+	J = Sd12 * [-S0 eye(3)]
+	r = Sd12 * d10
+	% use 3 points to represent a plane
+	disp('point-plane')
+	J = Dd13 * J
+	r = Dd13 * r
+	
+	%% LaserMapping derivation
+	syms x1 y1 z1
+	syms vx vy vz
+	Sv = [0 -vz vy; vz 0 -vx; -vy vx 0];
+	Dv = diag([vx vy vz]);
+	% use a point and a direction vector to represent a line
+	disp('point-line')
+	J = Sv * [-S0 eye(3)]
+	r = Sv * d10
+	% use a point and a normal vector to represent a plane
+	disp('point-plane')
+	J = Dv * [-S0 eye(3)]
+	r = Dv * d10
+	\end{lstlisting}
+
+\subsubsection{注意}
+上面公式中的$\vecba{d_\epsilon}$表示误差向量，${\partial \vecba{d_{\epsilon}}}/{\partial\delta\xi}$表示误差向量相对于李代数增量$\delta\xi$的偏导（雅克比矩阵）。利用误差项和雅克比矩阵，使用LM方法，可以迭代得出位姿估计值。
+
+\subsection{LaserMapping}
+LaserOdometry对相邻两帧之间进行匹配，由于累计误差的存在和里程计本身的不可靠性，loam通过LaserMapping进行位姿的优化，其原理是，将新的扫描帧与附近的点云通过匹配确定位姿，同时在搜寻”点-线“和”点-面“时进行了细致的处理（过程为搜索线时使用特征值分解，看是否存在特征值较大的主方向；搜索面时使用最小二乘计算平面，若有点距离平面较远，则不是合法的”点-面“对）。
+\par 优化问题的计算与上面的完全相同。
+\par 已知优化后点$p'=e(\xi ^\wedge)p$，对应直线的经过点$p_0$，直线方向用\textbf{单位向量}$v$表示，则"点-线"可以使用下面的公式
+\begin{equation}
+	\vecba{d_{\epsilon}} = v^\wedge(e(\xi ^\wedge)p-p_0)
+\end{equation}
+\begin{equation}
+	\frac{\partial \vecba{d_{\epsilon}}}{\partial\delta\xi}
+	=
+	v^\wedge(e(\xi^\wedge)p)^\odot
+\end{equation}
+\par 已知优化后点$p'=e(\xi ^\wedge)p$，对应平面通过点$p_0$，平面法线方向用\textbf{单位向量}$v$表示，则"点-面"可以使用下面的公式
+\begin{equation}
+	\vecba{d_{\epsilon}} = v^{+}(e(\xi ^\wedge)p-p_0)
+\end{equation}
+\begin{equation}
+	\frac{\partial \vecba{d_{\epsilon}}}{\partial\delta\xi}
+	=
+	v^{+}(e(\xi^\wedge)p)^\odot
+\end{equation}

@@ -1,0 +1,223 @@
+\section{刚体在三维空间中运动表示}
+本章主要探究坐标和坐标系在三维空间中的旋转变换规律。
+\subsection{旋转表示}
+\subsubsection{欧拉角}
+莱昂哈德·欧拉用欧拉角来描述刚体在三维欧几里得空间的方向。对于任何参考系，一个刚体的方向，是依照顺序，从这参考系，做三个欧拉角的旋转而设定的。换句话说，任何关于刚体旋转的旋转矩阵都是由三个基本旋转矩阵复合而成的。
+\\\indent
+根据旋转轴顺序的不同，可以把旋转分为12种：
+Proper Euler angles (z-x-z, x-y-x, y-z-y, z-y-z, x-z-x, y-x-y)
+Tait–Bryan angles (x-y-z, y-z-x, z-x-y, x-z-y, z-y-x, y-x-z).
+Tait–Bryan angles are also called Cardan angles; nautical angles; heading, elevation, and bank; or yaw, pitch, and roll.
+\subsubsection{内旋和外旋}
+对于在三维空间里的一个参考系，任何坐标系的取向，都可以用三个欧拉角来表现。参考系又称为实验室参考系，是静止不动的。连续的旋转可以分为内旋和外旋两种：若坐标系依托于参考系建立，则为外旋；若坐标系根据刚体建立，则为内旋。
+\\\indent
+举个例子，想象一个飞机，若以东为X轴、北为Y轴、上为Y轴建立坐标系，则为外旋；若以飞机右翼为X轴、机头为Y轴、上方为Z轴建立坐标系，则为内旋。因此，二者的关键区别是：外旋的坐标系是固定的，内旋的坐标系是移动的。
+\\\indent
+内旋（intrinsic）是基于移动坐标系的旋转，旋转过程中坐标系基准相对于旋转体不变、相对于外部环境变化。
+\\\indent
+外旋（extrinsic）是基于固定坐标系的旋转，旋转过程中坐标系基准相对于外部环境不变、相对于旋转体变化。
+\subsubsection{坐标和坐标系变换}
+坐标系变换：假设空间中有多个坐标系，求解同一个点在不同坐标系下的坐标或求解坐标系变换关系，是坐标系变换的基本内容，坐标系变换可以用外旋或内旋表示。
+\\\indent
+坐标变换：已知一个固定坐标系，求刚体进行旋转平移时刚体上点的变换（外旋）。
+\subsubsection{基、坐标和旋转矩阵}
+\paragraph{基和坐标}
+设有序向量组 $B={\beta_1,\beta_2,...,\beta_n} \subset R^n$ ，如果B线性无关，则 $R^n$ 中任一向量均可由B线性表示，即
+\begin{equation}
+  \alpha=a_1 \beta_1 + a_2 \beta_2 + ... + a_n \beta_n
+\end{equation}
+就称B是$R^n$下的一组基，有序数组 $(a_1,a_2,...,a_n)$ 是向量 $\alpha$ 关于基B的坐标。记为
+\begin{equation}
+  \alpha_B =
+  \begin{bmatrix}
+    a_1 & a_2 & ... & a_n
+  \end{bmatrix}^T
+\end{equation}
+\paragraph{旋转矩阵}
+设 $R^n$ 的两组基 $B=[\beta_1,\beta_2,...,\beta_n]$ 和 $B'=[\beta '_1,\beta '_2,...,\beta '_n]$ 满足 $B' = B A$ ，则矩阵A称为旧基B1到新基B2的过渡矩阵（变换矩阵）。
+\\
+同一向量在不同的基下有不同的坐标，如 $ \alpha = B \alpha_{B} = B' \alpha_{B'}$ ，其中 $\alpha_{B},\alpha_{B'}$ 为坐标向量(列向量)，则有
+\begin{equation}
+  \alpha_{B'} = A^{-1} \alpha_{B}
+  两个标准正交基之间的过渡矩阵一般被称为旋转矩阵。
+\end{equation}
+\paragraph{二维旋转矩阵}
+二维的旋转矩阵表示如下：
+\begin{equation}
+  R =
+  \begin{bmatrix}
+    \cos \theta  & \sin \theta \\
+    -\sin \theta & \cos \theta
+  \end{bmatrix}
+\end{equation}
+对于该式你可以有以下两种理解：\\
+它既可以表示旋转$\theta$角的坐标系变换，也可以表示旋转$-\theta$角的坐标变换。注意，逆时针为正方向。
+\subsubsection{欧拉角到旋转矩阵}
+\paragraph{欧拉角和旋转矩阵}
+对应的旋转矩阵分别为
+\begin{equation}
+  R_x(\theta_x)=
+  \begin{bmatrix}
+    1 & 0              & 0             \\
+    0 & \cos \theta_x  & \sin \theta_x \\
+    0 & -\sin \theta_x & \cos \theta_x
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  R_y(\theta_y)=
+  \begin{bmatrix}
+    \cos \theta_y & 0 & -\sin \theta_y \\
+    0             & 1 & 0              \\
+    \sin \theta_y & 0 & \cos \theta_y
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  R_z(\theta_z)=
+  \begin{bmatrix}
+    \cos \theta_z  & \sin \theta_z & 0 \\
+    -\sin \theta_z & \cos \theta_z & 0 \\
+    0              & 0             & 1
+  \end{bmatrix}
+\end{equation}
+按照 Z-Y-X 的旋转顺序旋转，旋转矩阵应为
+\begin{equation}
+  R=R_x(\theta_x) R_y(\theta_y) R_z(\theta_z)
+\end{equation}
+点的坐标在旋转后的变化为
+\begin{equation}
+  p' = R p
+\end{equation}
+其中，$p,p'$分别为旋转前后基下的坐标，因此上述进行的是\textbf{内旋坐标系变换}。
+
+\paragraph{内旋和外旋（坐标系变换）}
+从上一小节可以看出，内旋坐标系变换只需左乘变换矩阵即可。例如，绕当前坐标系的z轴旋转的坐标系变换为
+\begin{equation}
+  p' = R_{z,intri} R p = (R_{z,intri} R) p
+\end{equation}
+外旋坐标系变换可以看成内旋的叠加。例如，绕初始坐标系的z轴旋转的坐标系变换是以下坐标系变换的叠加：变换回原始坐标系($R^{-1}$)->绕z轴旋转$R_{z,extri}$->从原始坐标系变换回来$R$，可以用公式表示为
+\begin{equation}
+  p' = R R_{z,extri} R^{-1} R p = R R_{z,extri} p = (R R_{z,extri}) p
+\end{equation}
+可以看出，内旋左乘旋转矩阵，外旋右乘旋转矩阵。\\
+内旋XYZ的变换为
+\begin{equation}
+  R_{extri,frame}=R_z(\theta_z) R_y(\theta_y) R_x(\theta_x)
+\end{equation}
+外旋XYZ的变换为
+\begin{equation}
+  R_{intri,coord}=R_x(\theta_x) R_y(\theta_y) R_z(\theta_z)
+\end{equation}
+因此，内旋XYZ\textbf{等价于}外旋ZYX。请注意，本节讨论的都是坐标系变换。
+
+\paragraph{三维空间刚体变换（含平移）}
+无论内旋还是外旋，平移变换都是对旋转矩阵左乘，结合上面的内旋左乘、外旋右乘，可以得到下面的结论：\\
+对于外旋坐标系变换或内旋坐标变换，先平移后旋转或者先旋转后平移没有区别，都可以写成
+\begin{equation}
+  T_{extri} = T_t \cdot T_{init} \cdot T_R
+\end{equation}
+其中，$T_{init}$是刚体的初始位姿。\\
+对于内旋，平移旋转是有先后区别的，先平移后旋转是
+\begin{equation}
+  T_{intri,t-R} = T_R \cdot T_t \cdot T_{init}
+\end{equation}
+先旋转后平移是
+\begin{equation}
+  T_{intri,R-t} = T_t \cdot T_R \cdot T_{init}
+\end{equation}
+其中，$T_{init}$是坐标系的初始位姿。
+
+\paragraph{坐标系变换和坐标变换}（含内外旋）
+\\
+内旋XYZ的坐标系变换的物理意义为：要旋转的是一个坐标系，坐标系随刚体运动，依次绕该坐标系XYZ旋转，R为空间上同一个点在基准坐标系和新坐标系之间的坐标变换矩阵。显然，公式为
+\begin{equation}
+  R_{intri,frame}=R_z(\theta_z) R_y(\theta_y) R_x(\theta_x) \label{eq1}
+\end{equation}
+外旋XYZ的坐标系变换的物理意义为：要旋转的是一个坐标系，基准坐标系固定不动，依次绕基准坐标系XYZ旋转，R为空间上同一个点在基准坐标系和新坐标系之间的坐标变换矩阵。由公式(\ref{eq1})及推导可知，公式为
+\begin{equation}
+  R_{extri,frame}=R_x(\theta_x) R_y(\theta_y) R_z(\theta_z) \label{eq2}
+\end{equation}
+内旋XYZ的坐标变换的物理意义为：要旋转的是一个刚体，坐标系随刚体运动，依次绕该坐标系XYZ旋转，R为刚体上一个点旋转前后的坐标变换矩阵。由公式(\ref{eq4})及推导可知，公式为
+\begin{equation}
+  R_{intri,coord}=R_x(-\theta_x) R_y(-\theta_y) R_z(-\theta_z) \label{eq3}
+\end{equation}
+外旋XYZ的坐标变换的物理意义为：要旋转的是一个刚体，基准坐标系固定不动，依次绕基准坐标系XYZ旋转，R为刚体上一个点旋转前后的坐标变换矩阵。显然，公式为
+\begin{equation}
+  R_{intri,coord}=R_z(-\theta_z) R_y(-\theta_y) R_x(-\theta_x) \label{eq4}
+\end{equation}
+其中，公式(\ref{eq1})、(\ref{eq2})、(\ref{eq4})的物理意义都容易理解，公式(\ref{eq3})稍微难理解一些，可以认为是刚体本身有一个与刚体相对静止的坐标系，旋转后刚体上的点只有两种坐标：旋转前外部固定坐标系下的坐标、旋转后在外部固定坐标系下的坐标，它们之间的变换即对应公式(\ref{eq3})。
+\begin{equation}
+  R_{intri,frame} R_{intri,coord} = I
+\end{equation}
+\begin{equation}
+  R_{extri,frame} R_{extri,coord} = I
+\end{equation}
+因此，有以下结论：
+% 小字体居中
+\begin{center}
+  \footnotesize 内旋XYZ的坐标系变换	$\Leftrightarrow$ 内旋-Z-Y-X的坐标变换
+  \\
+  $\Leftrightarrow$ 外旋ZYX的坐标系变换$\Leftrightarrow$ 外旋-X-Y-Z的坐标变换
+\end{center}
+
+\subsubsection{MATLAB中的转换函数}
+MATLAB中有两个转换函数（angle2dcm和dcm2angle）可以用于欧拉角和旋转矩阵之间的转换。请注意，MATLAB中的欧拉角全都是内旋坐标系变换，旋转轴的顺序可以自己指定。
+\\\indent
+\begin{equation}
+  angle2dcm(r_1,r_2,r_3,'xyz')=R_z(r_3) R_y(r_2) R_x(r_1)
+\end{equation}
+
+\subsubsection{附录}
+欧拉角: \url{https://en.wikipedia.org/wiki/Euler_angles}
+（该词条的Rotation Matrix一节中的旋转矩阵表表示的是外旋，MATLAB表示的是内旋）
+\\\indent
+旋转矩阵: \url{https://en.wikipedia.org/wiki/Rotation_matrix}
+\\\indent
+四元数: \url{https://en.wikipedia.org/wiki/Quaternion}
+
+
+\subsection{李群和李代数 *}
+\subsubsection{预备知识}
+对给定的两个三维实数向量，他们的叉积可以通过下面的公式计算
+\begin{equation}
+  u \times v =
+  \begin{bmatrix}
+    u_2 v_3 - u_3 v_2 \\
+    u_3 v_1 - u_1 v_3 \\
+    u_1 v_2 - u_2 v_1
+  \end{bmatrix}
+  \in \mathbb{R}^3
+\end{equation}
+我们可以把叉积通过如下方式表示：
+\begin{equation}
+  u \times v =
+  \hat{u} v =
+  \begin{bmatrix}
+    0    & -u_3 & u_2  \\
+    u_3  & 0    & -u_1 \\
+    -u_2 & u_1  & 0
+  \end{bmatrix}
+  v
+\end{equation}
+\subsubsection{旋转矩阵与$so(3)$}
+旋转矩阵有如下性质
+\begin{equation}
+  R(t) R^T(t) = I
+\end{equation}
+
+\begin{equation}
+  \dot{R}(t) R^T(t) = -(\dot{R}(t) R^T(t))^T
+\end{equation}
+
+\begin{equation}
+  \dot{R}(t) = \hat{\omega}(t) R(t)
+\end{equation}
+
+李代数
+\begin{equation}
+  so(3) = \{ \hat{\omega} \in \mathbb{R}^{3\times 3} | \omega \in \mathbb{R}^3 \}
+\end{equation}
+
+李群
+\begin{equation}
+  SO(3) = \{ R \in \mathbb{R}^{3\times 3} | R^T R = I \}
+\end{equation}

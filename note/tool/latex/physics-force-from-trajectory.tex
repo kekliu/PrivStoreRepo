@@ -1,0 +1,35 @@
+\section{已知运动轨迹，推算向心力}
+\subsection{问题}
+已知物体仅在向心力的作用下沿着给定轨迹运动，求该向心力的规律。
+\subsection{推导}
+为了方便推导，我们假设向心力来自原点。设某个时刻，物体的位置矢量为 $ \vec{r} =(x,y) $，速度矢量为 $ \vec{v}=(v_x,v_y)=v_x (1,y') $，其中，$ y'=\frac{dy}{dx} $。
+\\
+由动量守恒知，$ \vec{r}\times\vec{v}=const $，则$ v_x\propto\frac{1}{y-y'x} $，令
+\begin{equation} v_x=\frac{k}{y-y'x} \end{equation}
+则加速度
+\begin{equation}
+  \begin{split}
+    \vec{a} &= \frac{d\vec{v}}{dt} = \frac{d\vec{v}}{dx} \frac{dx}{dt} = \frac{d\vec{v}}{dx} v_x \\
+    &= \frac{k^2 y''}{(y-y'x)^3} (x,y)
+  \end{split}
+\end{equation}
+\subsection{推论}
+\noindent
+通过该公式可以得到一些有趣的结果：
+\\若轨迹为圆锥曲线，则指向曲线焦点的向心力反比于距离的平方；
+\\若轨迹为椭圆轨道，则指向椭圆中心的向心力正比于距离；
+\\若轨迹为任意曲线，则仍可通过上述公式计算向心力。
+\subsection{求指向无穷远处的力的规律}
+给定一个曲线，假设其只受到来自无穷远方向的力，求该力的规律。
+取力的方向为y轴，与y轴垂直的为x轴。
+设某个时刻，物体的位置矢量为 $ \vec{r} =(x,y) $。则由水平方向不受力
+易知 $dx / v_x = dt$ ，竖直方向有
+\begin{equation}
+  v_y = v_x y'
+\end{equation}
+\begin{equation}
+  F = m a_y = m v_x \frac{y'}{dt} = m v_x \frac{dy'}{dx / v_x} = m v_x^2 y''
+\end{equation}
+\paragraph{结论}
+指向无穷远处的力与二阶导数成正比。
+特别地，抛物线受到的力为常量。

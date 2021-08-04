@@ -1,0 +1,43 @@
+\section{VINS预积分推导}
+\subsection{记号说明}
+\subsubsection{上下标}
+\par b = body frame = imu frame
+\par w = world frame
+
+\subsection{IMU noise model}
+\begin{equation}
+	\begin{split}
+		\hat{a}_t &= R_w^t(a_t+g^w)+b_{at}+n_{at}\\  \hat{\omega}_t &= \omega_t+b_{gt}+n_{gt}
+	\end{split}
+\end{equation}
+
+\subsection{title}
+In world frame, kinetic equations can be written as follows:
+\begin{equation}
+	\begin{split}
+		p_{b_{k+1}}^w & = p_{b_k}^w + v_{b_k}^w \Delta t_k +\iint_{t\in [t_k,t_{k+1}]} (R^w_t(\hat{a}_t-b_{a_t}-n_a)-g^w) dt^2 \\
+		v_{b+1}^w & = v_{b_k}^w + \int_{t\in [t_k,t_{k+1}]} (R^w_t(\hat{a}_t-b_{a_t}-n_a)-g^w) dt \\
+		q_{b_{k+1}}^w & = q_{b_k}^w \otimes \int_{t\in [t_k,t_{k+1}]} \frac{1}{2} \Omega(\hat{w}_t-b_{w_t}-n_w)q_t^{b_k} dt
+	\end{split}
+\end{equation}
+\par In IMU frame w.r.t. previous time,
+\begin{equation}
+	\begin{split}
+		R_w^{b_k}p_{b_{k+1}}^w &= R_w^{b_k}( p_{b_k}^w + v_{b_k}^w\Delta{t} - \frac12g^w\Delta{t}^2) + \alpha_{b_{k+1}}^{b_k} \\
+		R_w^{b_k}v_{b_{k+1}}^w &= R_w^{b_k}( v_{b_k}^w - g^w\Delta{t} ) + \beta_{b_{k+1}}^{b_k} \\
+		q_{b_{k+1}}^w &= q_{b_k}^w \otimes \gamma_{b_{k+1}}^{b_k}
+	\end{split}
+\end{equation}
+\par where
+\begin{equation}
+	\begin{split}
+		\alpha_{b_{k+1}}^{b_k} &= \iint_{t\in[k,k+1]}R_t^w(\hat{a}_t-b_{at})dt^2 \\
+		\beta_{b_{k+1}}^{b_k} &= \int_{t\in[k,k+1]}R_t^w(\hat{a}_t-b_{at})dt \\
+		\gamma_{b_{k+1}}^{b_k} &= \int_{t\in[k,k+1]}\frac12\Omega(\hat{\omega}-b_{gt})q_tdt
+	\end{split}
+\end{equation}
+we get preintegration quantity $\alpha_{b_{k+1}}^{b_k}$, $\beta_{b_{k+1}}^{b_k}$ and $\gamma_{b_{k+1}}^{b_k}$. As we see preintegration quantity is only related with imu bias $b_{at}$ and $b_{gt}$.
+
+
+
+
