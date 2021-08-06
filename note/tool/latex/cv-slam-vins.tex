@@ -44,9 +44,9 @@ In world frame, kinetic equations can be written as follows:
 In discrete time, preintegration quantity can be iterated as Eq. \ref{eq:discrete-time-preintegration}. Noise $n_{a_t}$ and $n_{g_t}$ are ignored in the equation because they can not be predicted and their integration can be treated as zero during small interval (in fact the integration of is small random walk). $\alpha_i^{b_k}$, $\beta_i^{b_k}$, $\gamma_i^{b_k}$ will be initialized to be 0 or identity rotation respectively.
 \begin{equation} \label{eq:discrete-time-preintegration}
 	\begin{split}
-		\alpha_{i+1}^{b_k} &= \alpha_i^{b_k} + \frac12(\beta_i^{b_k}+\beta_{i+1}^{b_k})\delta{t} \\
-		\beta_{i+1}^{b_k} &= \beta_i^{b_k} + \frac12\left[\gamma_i^{b_k}(\hat{a}_i-b_{a_i})+\gamma_{i+1}^{b_k}(\hat{a}_{i+1}-b_{a_i})\right]\delta{t} \\
-		\gamma_{i+1}^{b_k} &= \gamma_i^{b_k} \otimes
+		\hat{\alpha}_{i+1}^{b_k} &= \hat{\alpha}_i^{b_k} + \frac12(\hat{\beta}_i^{b_k}+\hat{\beta}_{i+1}^{b_k})\delta{t} \\
+		\hat{\beta}_{i+1}^{b_k} &= \hat{\beta}_i^{b_k} + \frac12\left[\hat{\gamma}_i^{b_k}(\hat{a}_i-b_{a_i})+\hat{\gamma}_{i+1}^{b_k}(\hat{a}_{i+1}-b_{a_i})\right]\delta{t} \\
+		\hat{\gamma}_{i+1}^{b_k} &= \hat{\gamma}_i^{b_k} \otimes
 		\begin{bmatrix}
 			1 \\ \frac12(\frac{\hat{w}_i+\hat{w}_{i+1}}2-b_{g_i})\delta{t}
 		\end{bmatrix}
