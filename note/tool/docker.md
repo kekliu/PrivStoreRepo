@@ -27,9 +27,9 @@ docker run -itd --name mongo -p 27017:27017 mongo:4.4
 #### nginx
 ##### file server
 ```bash
-docker run -p 20080:20080 -v $HOME/.data:/dataDir --restart always -itd --name nginx nginx:1.19 bash
-docker exec -it nginx bash
-cat << EOF > /etc/nginx/conf.d/file_server.conf                              
+docker run -p 20080:20080 -v $(pwd):/dataDir --restart always -itd --name nginx nginx:1.19
+docker exec -i nginx bash -s << EOF
+cat << EOF_INTERNAL > /etc/nginx/conf.d/file_server.conf
 server {
   listen 20080;
   server_name localhost;
@@ -40,9 +40,9 @@ server {
     autoindex_localtime on;
   }
 }
+EOF_INTERNAL
 EOF
-nginx -t
-service nginx restart
+docker restart nginx
 ```
 
 ## Development
