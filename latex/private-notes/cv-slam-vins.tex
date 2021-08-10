@@ -24,7 +24,7 @@ In world frame, kinetic equations can be written as follows:
 	\end{split}
 \end{equation}
 \par In IMU frame w.r.t. previous time,
-\begin{equation}
+\begin{equation} \label{eq:vins-preintegration}
 	\begin{split}
 		R_w^{b_k}p_{b_{k+1}}^w &= R_w^{b_k}( p_{b_k}^w + v_{b_k}^w\Delta{t} - \frac12g^w\Delta{t}^2) + \alpha_{b_{k+1}}^{b_k} \\
 		R_w^{b_k}v_{b_{k+1}}^w &= R_w^{b_k}( v_{b_k}^w - g^w\Delta{t} ) + \beta_{b_{k+1}}^{b_k} \\
@@ -58,6 +58,67 @@ So preintegration quantity can be expanded in first-order-taylor:
 	\begin{split}
 		\alpha_{b_{k+1}}^{b_k} &= \hat{\alpha}_{b_{k+1}}^{b_k}+J\delta{b_{a_k}}+J\delta{b_{g_k}} \\
 		\beta_{b_{k+1}}^{b_k} &= \hat{\beta}_{b_{k+1}}^{b_k}+J\delta{b_{a_k}}+J\delta{b_{g_k}} \\
-		\theta_{b_{k+1}}^{b_k} &= tdb
+		\gamma_{b_{k+1}}^{b_k} &= \hat{\gamma}_{b_{k+1}}^{b_k} \otimes
+		\begin{bmatrix}
+			1 \\\frac12J\delta{b_{g_k}}
+		\end{bmatrix}
 	\end{split}
+\end{equation}
+
+\subsection{Initialization for lidar-imu system}
+\par Denote frame of lidar odometry as $c$, frame of imu as $b$.
+\subsubsection{Extrinsic estimation}
+外参包含$q_b^c$和$p_b^c$，一般来说，$q_b^c$可以初始化时估计，$p_b^c$量测即可。
+\begin{equation} \label{eq:vins-ex-estimate}
+	q_{b_{k+1}}^{c_k} = q_{c_{k+1}}^{c_k} \otimes q_b^c = q_b^c \otimes q_{b_{k+1}}^{b_k}
+\end{equation}
+\par 其中，$q_{c_{k+1}}^{c_k}$和$q_{b_{k+1}}^{b_k}$都是计算得到的，时间相对应，可以通过ceres-solver最小化$q_{c_{k+1}}^{c_k}\otimes q_b^c$和$q_b^c \otimes q_{b_{k+1}}^{b_k}$的$angularDistance$求解$q_b^c$，或者由公式\ref{eq:vins-ex-estimate}得：
+\begin{equation}
+	\left(\mathcal{L}(q_{b_{k+1}}^{b_k}) - \mathcal{R}(q_{c_{k+1}}^{c_k})\right) q_b^c = 0
+\end{equation}
+\par 解上述方程时，$\mathcal{L}(q_{b_{k+1}}^{b_k}) - \mathcal{R}(q_{c_{k+1}}^{c_k})$的最小特征值对应的特征矩阵即为$q_b^c$。
+
+\subsubsection{Initialize gyro bias}
+\begin{equation}
+	\begin{split}
+		\gamma_{b_{k+1}}^{b_k} &= \hat{\gamma}_{b_{k+1}}^{b_k} \otimes
+		\begin{bmatrix}
+			1 \\\frac12J\delta{b_{g_k}}
+		\end{bmatrix} \\
+		&= {q_{b_k}^{c_0}}^{-1} \otimes q_{b_{k+1}}^{c_0}
+	\end{split}
+\end{equation}
+\begin{equation}
+	J\delta{b_{g_k}} = 2 \left\lbrace {{}\hat{\gamma}_{b_{k+1}}^{b_k}}^{-1} \otimes {q_{b_k}^{c_0}}^{-1} \otimes q_{b_{k+1}}^{c_0} \right\rbrace_{vec}
+\end{equation}
+\par 解上述方程得到陀螺仪偏置$\delta{b_{g_k}}$，而后更新$\alpha_{b_{k+1}}^{b_k}$，$\beta_{b_{k+1}}^{b_k}$和$\gamma_{b_{k+1}}^{b_k}$。
+
+\subsubsection{Initialize velocity and gravity}
+\begin{equation} \label{eq:vins-transform}
+	\begin{split}
+		q_{b_k}^{c_0} &= q_{c_k}^{c_0} \otimes q_b^c \\
+		p_{b_k}^{c_0} &= p_{c_k}^{c_0} + R_{c_k}^{c_0} p_b^c
+	\end{split}
+\end{equation}
+\par 公式\ref{eq:vins-preintegration}是预积分量在$w$坐标系下的表示，在$c_0$坐标系下可表示为：
+\begin{equation}
+	\begin{split}
+		R_{c_0}^{b_k}p_{b_{k+1}}^{c_0} &= R_{c_0}^{b_k}( p_{b_k}^{c_0} + v_{b_k}^{c_0}\Delta{t} - \frac12g^{c_0}\Delta{t}^2) + \alpha_{b_{k+1}}^{b_k} \\
+		R_{c_0}^{b_k}v_{b_{k+1}}^{c_0} &= R_{c_0}^{b_k}( v_{b_k}^{c_0} - g^{c_0}\Delta{t} ) + \beta_{b_{k+1}}^{b_k}
+	\end{split}
+\end{equation}
+\par 待求量为$v_{b_k}^{c_0}$，$v_{b_{k+1}}^{c_0}$和$g^{c_0}$，写成矩阵形式为：
+\begin{equation}
+	\begin{bmatrix}
+		R_{c_0}^{b_k}\Delta{t} & 0              & -\frac12\Delta{t}^2 \\
+		R_{c_0}^{b_k}          & -R_{c_0}^{b_k} & -I\Delta{t}
+	\end{bmatrix}
+	\begin{bmatrix}
+		v_{b_k}^{c_0} \\ v_{b_{k+1}}^{c_0} \\ g^{c_0}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		R_{c_0}^{b_k} (p_{b_{k+1}}^{c_0}-p_{b_k}^{c_0}) - \alpha_{b_{k+1}}^{b_k} \\
+		\beta_{b_{k+1}}^{b_k}
+	\end{bmatrix}
 \end{equation}
