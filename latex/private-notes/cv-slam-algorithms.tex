@@ -7,73 +7,86 @@
 \paragraph{光流法}
 \paragraph{直接法}
 \subsubsection{概率格网（激光）}
-\subsection{优化策略}
-\subsubsection{滤波器方法}
-\subsubsection*{卡尔曼滤波: KF}
-已知状态方程和观测方程
+\subsection{滤波器方法}
+\subsubsection{贝叶斯定理}
+\par 约定以下记号：$x_k$是系统状态量（如位置、速度、航向），$u_k$是控制量（如角速度、力），通过贝叶斯定理可以得到：
 \begin{equation}
-  \left\{
-  \begin{array}{lr}
-    x_t = F x_{t-1} + B u_{t-1} + w \\
-    z_t = H x_t + v
-  \end{array}
-  \right.
+	\begin{split}
+		p(x_k|x_{k-1},u_k,z_k) & = \frac{p(x_k,x_{k-1},u_k,z_k)}{p(x_{k-1},u_k,z_k)} \\
+		& = \frac{p(z_k|x_k,x_{k-1},u_k)p(x_k,x_{k-1},u_k)}{p(z_k|x_{k-1},u_k)p(x_{k-1},u_k)} \\
+		&= \frac{p(z_k|x_k,x_{k-1},u_k)p(x_k|x_{k-1},u_k)p(x_{k-1},u_k)}{p(z_k|x_{k-1},u_k)p(x_{k-1},u_k)} \\
+		&= \frac{p(z_k|x_k,x_{k-1},u_k)p(x_k|x_{k-1},u_k)}{p(z_k|x_{k-1},u_k)}
+	\end{split}
 \end{equation}
-\par 其中，$x_t$是系统状态量（如位置、速度、航向），$u_{t-1}$是控制量（如角速度、力），$F$是状态转移矩阵，$B$是输入控制矩阵，$w$是过程噪声，$z_t$是量测量，$H$是状态向量到量测量的变换矩阵，$v$是量测噪声。请注意，上面的$F,B,w,H,v$都有下标t或t-1。过程噪声$w$和量测噪声$v$满足零均值高斯分布：
+\par 在滤波器的应用场景中，机器人的运动状态满足马尔可夫假设，即当前状态只与上一刻状态相关，与更早的状态无关。由马尔可夫假设得到$p(z_k|x_k,x_{k-1},u_k)=p(z_k|x_k)$和$p(z_k|x_{k-1},u_k)=p(z_k)$，代入上述公式得：
 \begin{equation}
-  w \sim N(0,R),v \sim N(0,Q)
+	\begin{split}
+		p(x_k|x_{k-1},u_k,z_k) & = \frac{p(z_k|x_k)p(x_k|x_{k-1},u_k)}{p(z_k)}
+	\end{split}
+\end{equation}
+\par 其中，$p(z_k|x_k)$是似然，$p(x_k|x_{k-1},u_k)$是先验。
+滤波器方法即是先描述先验和似然的数学模型，再取状态值的最大后验的一种方法。
+
+
+\subsubsection{卡尔曼滤波/线性高斯滤波: KF}
+已知状态方程和观测方程：
+\begin{equation}
+	\left\{
+	\begin{array}{lr}
+		x_k = F x_{k-1} + B u_k + w \\
+		z_k = H x_k + v
+	\end{array}
+	\right.
+\end{equation}
+\par 其中，$x_k$是系统状态量（如位置、速度、航向），$u_k$是控制量（如角速度、力），$F$是状态转移矩阵，$B$是输入控制矩阵，$w$是过程噪声，$z_k$是量测量，$H$是状态向量到量测量的变换矩阵，$v$是量测噪声。请注意，上面的$F,B,w,H,v$都有下标t，这里为了方便书写略去不写。过程噪声$w$和量测噪声$v$满足零均值高斯分布：
+\begin{equation}
+	w \sim N(0,R),v \sim N(0,Q)
 \end{equation}
 \par 进一步得到下面的方程组：
 \begin{equation}
-  \left\{
-  \begin{split}
-    P(x_t)
-    &=N(\overline{x}_t,\overline{P}_t)
-    =N(F \hat{x}_{t-1} + B u_{t-1}, F \hat{P}_{t-1} F^T + R) \\
-    P(z_t|x_t) &=N(H x_t,Q) \\
-    P(x_t|z_t) &= \frac{P(z_t|x_t) P(x_t)}{P(z_t)} \propto P(z_t|x_t) P(x_t)
-  \end{split}
-  \right.
+	\left\{
+	\begin{split}
+		p(x_k|x_{k-1},u_k)
+		&=N(\bar{x}_k,\bar{P}_k)
+		=N(F \hat{x}_{k-1} + B u_k, F \hat{P}_{k-1} F^T + R) \\
+		p(z_k|x_k) &=N(H x_k,Q) \\
+		p(x_k|z_k) &= \frac{p(z_k|x_k)p(x_k|x_{k-1},u_k)}{p(z_k)} \propto p(z_k|x_k)p(x_k|x_{k-1},u_k)
+	\end{split}
+	\right.
 \end{equation}
-\par 其中，第三个等式中的$P(z_t|x_t)$叫似然，$P(x_t)$叫先验。在只有观测方程、没有状态方程时，只能使用MLE（最大似然估计）；在有状态方程后，可以借助先验概率$P(x_t)$，通过MAP（最大后验概率）估计$x_t$。
+\par 具体来说：
 \begin{equation}
-  N(\hat{x}_t,\hat{P}_t) \propto N(\overline{x}_t,\overline{P}_t) \cdot N(H x_t,Q)
+	N(\hat{x}_k,\hat{P}_k) \propto N(\bar{x}_k,\bar{P}_k) \cdot N(H x_k,Q)
 \end{equation}
 \par 考虑等式两边的指数部分，可以得到
 \begin{equation}
-  (x_t-\hat{x}_t)^T\hat{P}_t^{-1}(x_t-\hat{x}_t)
-  =
-  (z_t-H x_t)^T Q^{-1} (z_t-H x_t)
-  +
-  (x_t-\hat{x}_t)^T \overline{P}_t^{-1} (x_t-\hat{x}_t)
+	(x_k-\hat{x}_k)^T\hat{P}_k^{-1}(x_k-\hat{x}_k)
+	=
+	(z_k-H x_k)^T Q^{-1} (z_k-H x_k)
+	+
+	(x_k-\hat{x}_k)^T \bar{P}_k^{-1} (x_k-\hat{x}_k)
 \end{equation}
-\par 比较等式两端$x_t$的一次项和二次项系数，可以得到卡尔曼滤波器的结果：
-\par {a. 预测公式}
+\par 令等号两侧$x_k$的一次项和二次项系数相等，可以得到卡尔曼滤波器的结果：
+\par a. 预测
 \begin{equation}
-  \overline{x}_t=F\hat{x}_{t-1} + B u_{t-1}
+	\begin{split}
+		\bar{x}_k&=F\hat{x}_{k-1} + B u_k \\
+		\bar{P}_k&=F\hat{P}_{k-1}F^T+R
+	\end{split}
 \end{equation}
+\par b. 更新
 \begin{equation}
-  \overline{P}_t=F\hat{P}_{t-1}F^T+R
+	\begin{split}
+		K&=\bar{P}_k H^T(H \bar{P}_k H^T + Q)^{-1} \\
+		\hat{x}_k&=\bar{t}_k+K(z_k-H \bar{x}_k) \\
+		\hat{P}_k&=(I-K H)\bar{P}_k
+	\end{split}
 \end{equation}
-\par {b. 更新公式}
-\begin{equation}
-  K=\overline{P}_t H^T(H \overline{P}_t H^T + Q)^{-1}
-\end{equation}
-\begin{equation}
-  \hat{x}_t=\overline{t}_t+K(z_t-H \overline{x}_t)
-\end{equation}
-\begin{equation}
-  \hat{P}_t=(I-K H)\overline{P}_t
-\end{equation}
-\subsubsection*{扩展卡尔曼滤波: EKF}
-\subsubsection*{无迹卡尔曼滤波: UKF}
-\subsubsection*{粒子滤波: PF}
-\subsection{优化方法}
+
+
+\subsubsection{扩展卡尔曼滤波: EKF}
+\subsubsection{无迹卡尔曼滤波: UKF}
+\subsubsection{粒子滤波: PF}
+
+\subsection{图优化}
 \subsubsection{关键帧BA}
-\subsubsection{图优化}
-
-
-
-
-
-
