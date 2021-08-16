@@ -78,13 +78,96 @@
 \begin{equation}
 	\begin{split}
 		K&=\bar{P}_k H^T(H \bar{P}_k H^T + Q)^{-1} \\
-		\hat{x}_k&=\bar{t}_k+K(z_k-H \bar{x}_k) \\
+		\hat{x}_k&=\bar{x}_k+K(z_k-H \bar{x}_k) \\
 		\hat{P}_k&=(I-K H)\bar{P}_k
 	\end{split}
 \end{equation}
 
 
 \subsubsection{扩展卡尔曼滤波: EKF}
+\par 卡尔曼滤波器适用于状态方程和观测方程都是线性方程的情况。非线性的情况需要对方程进行线性化，然后应用卡尔曼滤波进行计算。例如，若状态方程和观测方程如下：
+\begin{equation}
+	\left\{
+	\begin{array}{lr}
+		x_k = f(x_{k-1}, u_k) + w \\
+		z_k = g(x_k) + v
+	\end{array}
+	\right.
+\end{equation}
+\par 一阶泰勒展开：
+\begin{equation}
+	\left\{
+	\begin{array}{lr}
+		x_k = f(x_{k-1}, u_k) + w \\
+		z_k = g(x_k) + v
+	\end{array}
+	\right.
+\end{equation}
+\par 滤波器公式和卡尔曼滤波类似：
+\par a. 预测
+\begin{equation}
+	\begin{split}
+		\bar{x}_k&=\underline{f(\hat{x}_{k-1}, u_k)} \\
+		\bar{P}_k&=F\hat{P}_{k-1}F^T+R
+	\end{split}
+\end{equation}
+\par b. 更新
+\begin{equation}
+	\begin{split}
+		K&=\bar{P}_k H^T(H \bar{P}_k H^T + Q)^{-1} \\
+		\hat{x}_k&=\bar{x}_k+K(z_k-\underline{g(\bar{x}_k)}) \\
+		\hat{P}_k&=(I-K H)\bar{P}_k
+	\end{split}
+\end{equation}
+\par 卡尔曼滤波的问题在于，TBD。
+
+\subsubsection{误差状态滤波：ESKF}
+\subsubsection*{状态方程}
+\begin{equation}
+	\begin{split}
+		x_{k} &= f(x_{k-1}) \\
+		x_{t,k} &= f(x_{t,{k-1}}) + w_k \\
+		x_k+\delta{x_k} &= f(x_{k-1}+\delta{x_{k-1}})+w_k
+	\end{split}
+\end{equation}
+\par 一阶泰勒展开后：
+\begin{equation}
+	\begin{split}
+		x_k+\delta{x_k} &= f(x_{k-1})+\frac{\partial f}{\partial\delta{x_{k-1}}}\bigg|_{x_{k-1},0} \delta{x_{k-1}} + w_k \\
+		&:= f(x_{k-1})+F_k \delta{x_{k-1}} + w_k
+	\end{split}
+\end{equation}
+\subsubsection*{观测方程}
+\begin{equation}
+	\begin{split}
+		z_k &= g(x_{t,k}) + w_k \\
+		z_k &= g(x_k+\delta{x_k})+w_k \\
+		&= g(x_k)+\frac{\partial g}{\partial\delta{x_k}}\bigg|_{x_k,0} \delta{x_k} + w_k \\
+		&:= g(x_k)+H_k \delta{x_k} + w_k
+	\end{split}
+\end{equation}
+\par 滤波器公式和卡尔曼滤波类似：
+\par a. 预测
+\begin{equation}
+	\begin{split}
+		\bar{x}_k &= \underline{ f(\hat{x}_{k-1}) } \\
+		\delta\bar{x}_k &= \underline{ F_k \delta\hat{x}_{k-1} } \\
+		\bar{P}_k&=F\hat{P}_{k-1}F^T+R
+	\end{split}
+\end{equation}
+\par b. 更新
+\begin{equation}
+	\begin{split}
+		K&=\bar{P}_k H^T(H \bar{P}_k H^T + Q)^{-1} \\
+		\delta\hat{x}_k&=\delta\bar{x}_k+K(z_k - \underline{g(\bar{x}_k)} - H_k\delta\bar{x}_k) \\
+		\hat{P}_k&=(I-K H)\bar{P}_k \\
+		\hat{x}_k &= \bar{x}_k + \delta\hat{x}_k
+	\end{split}
+\end{equation}
+滤波器公式和卡尔曼滤波类似，计算得到$\hat{\delta{x_k}}$，加上$\bar{x}_k$即可得到更新值。
+
+
+
 \subsubsection{无迹卡尔曼滤波: UKF}
 \subsubsection{粒子滤波: PF}
 

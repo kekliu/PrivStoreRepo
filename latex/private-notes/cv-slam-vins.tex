@@ -110,8 +110,8 @@ So preintegration quantity can be expanded in first-order-taylor:
 \par 待求量为$v_{b_k}^{c_0}$，$v_{b_{k+1}}^{c_0}$和$g^{c_0}$，写成矩阵形式为：
 \begin{equation}
 	\begin{bmatrix}
-		R_{c_0}^{b_k}\Delta{t} & 0              & -\frac12\Delta{t}^2 \\
-		R_{c_0}^{b_k}          & -R_{c_0}^{b_k} & -I\Delta{t}
+		R_{c_0}^{b_k}\Delta{t} & 0              & -\frac12R_{c_0}^{b_k}\Delta{t}^2 \\
+		R_{c_0}^{b_k}          & -R_{c_0}^{b_k} & -R_{c_0}^{b_k}\Delta{t}
 	\end{bmatrix}
 	\begin{bmatrix}
 		v_{b_k}^{c_0} \\ v_{b_{k+1}}^{c_0} \\ g^{c_0}
