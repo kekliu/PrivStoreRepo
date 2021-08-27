@@ -1,24 +1,38 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: devtools
+  name: dev-toolkits
+  labels:
+    app: dev-toolkits
 spec:
-  containers:
-    - name: ubuntu
-      image: registry.cn-hangzhou.aliyuncs.com/private_ns/ubuntu-dev
-      tty: true
-      command:
-        - zsh
-      resources:
-        limits:
-          cpu: "2"
-          memory: "1Gi"
-    - name: busybox
-      image: busybox:1.33.1
-      tty: true
-      command:
-        - bash
-      resources:
-        limits:
-          cpu: "1"
-          memory: "1Gi"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev-toolkits
+  template:
+    metadata:
+      labels:
+        app: dev-toolkits
+    spec:
+      containers:
+      - name: ubuntu
+        image: registry.cn-hangzhou.aliyuncs.com/c137/ubuntu-dev:latest
+        imagePullPolicy: Always
+        tty: true
+        command:
+          - zsh
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+      - name: busybox
+        image: busybox:1.28
+        tty: true
+        command:
+          - sh
+          - -c
+          - 'echo Container 1 is Running ; sleep 3600'
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
