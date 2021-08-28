@@ -90,7 +90,7 @@
 	\left\{
 	\begin{array}{lr}
 		x_k = f(x_{k-1}, u_k) + w \\
-		z_k = g(x_k) + v
+		z_k = h(x_k) + v
 	\end{array}
 	\right.
 \end{equation}
@@ -99,7 +99,7 @@
 	\left\{
 	\begin{array}{lr}
 		x_k = f(x_{k-1}, u_k) + w \\
-		z_k = g(x_k) + v
+		z_k = h(x_k) + v
 	\end{array}
 	\right.
 \end{equation}
@@ -115,7 +115,7 @@
 \begin{equation}
 	\begin{split}
 		K&=\bar{P}_k H^T(H \bar{P}_k H^T + Q)^{-1} \\
-		\hat{x}_k&=\bar{x}_k+K(z_k-\underline{g(\bar{x}_k)}) \\
+		\hat{x}_k&=\bar{x}_k+K(z_k-\underline{h(\bar{x}_k)}) \\
 		\hat{P}_k&=(I-K H)\bar{P}_k
 	\end{split}
 \end{equation}
@@ -140,10 +140,10 @@
 \subsubsection*{观测方程}
 \begin{equation}
 	\begin{split}
-		z_k &= g(x_{t,k}) + w_k \\
-		z_k &= g(x_k+\delta{x_k})+w_k \\
-		&= g(x_k)+\frac{\partial g}{\partial\delta{x_k}}\bigg|_{x_k,0} \delta{x_k} + w_k \\
-		&:= g(x_k)+H_k \delta{x_k} + w_k
+		z_k &= h(x_{t,k}) + w_k \\
+		z_k &= h(x_k+\delta{x_k})+w_k \\
+		&= h(x_k)+\frac{\partial h}{\partial\delta{x_k}}\bigg|_{x_k,0} \delta{x_k} + w_k \\
+		&:= h(x_k)+H_k \delta{x_k} + w_k
 	\end{split}
 \end{equation}
 \par 滤波器公式和卡尔曼滤波类似：
@@ -159,7 +159,7 @@
 \begin{equation}
 	\begin{split}
 		K&=\bar{P}_k H^T(H \bar{P}_k H^T + Q)^{-1} \\
-		\delta\hat{x}_k&=\delta\bar{x}_k+K(z_k - \underline{g(\bar{x}_k)} - H_k\delta\bar{x}_k) \\
+		\delta\hat{x}_k&=\delta\bar{x}_k+K(z_k - \underline{h(\bar{x}_k)} - H_k\delta\bar{x}_k) \\
 		\hat{P}_k&=(I-K H)\bar{P}_k \\
 		\hat{x}_k &= \bar{x}_k + \delta\hat{x}_k
 	\end{split}
