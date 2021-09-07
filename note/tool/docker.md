@@ -18,11 +18,19 @@ character_set_server = utf8
 ```bash
 docker run --restart always -d --name redis -p 6379:6379 redis:6.2
 ```
+
 ### mongodb
 
 ```bash
 docker run -itd --name mongo -p 27017:27017 mongo:4.4
 ```
+
+### minio
+
+```bash
+docker run -d --name minio-old -p 9002:9000 -v $(pwd):/data minio/minio:RELEASE.2021-06-14T01-29-23Z server /data
+```
+
 
 ### nginx as a file server
 ```bash
